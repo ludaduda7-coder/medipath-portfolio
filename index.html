@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediPath Wireframes & UI Concept</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  :root {
+    --teal: #0A7B6C;
+    --teal-light: #E8F5F3;
+    --teal-mid: #5BB5A8;
+    --amber: #E8A838;
+    --amber-light: #FEF6E4;
+    --blue: #2D6BE4;
+    --blue-light: #EEF3FC;
+    --red: #E04545;
+    --red-light: #FDEAEA;
+    --gray-100: #F7F8FA;
+    --gray-200: #ECEEF2;
+    --gray-300: #D4D8E2;
+    --gray-400: #9BA3B8;
+    --gray-600: #5C6478;
+    --gray-900: #1A1D2E;
+    --white: #FFFFFF;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0E1117;
+    color: var(--gray-900);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: #0E1117;
+    border-bottom: 1px solid #1E2330;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .site-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .site-logo span { color: var(--teal-mid); }
+
+  .view-tabs {
+    display: flex;
+    gap: 4px;
+    background: #1A1D2A;
+    border-radius: 10px;
+    padding: 4px;
+  }
+
+  .view-tab {
+    padding: 8px 20px;
+    border-radius: 7px;
+    border: none;
+    background: transparent;
+    color: var(--gray-400);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .view-tab.active {
+    background: var(--teal);
+    color: #fff;
+  }
+
+  .badge {
+    font-size: 11px;
+    color: var(--gray-400);
+    background: #1A1D2A;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid #2A2F3F;
+  }
+
+  /* ── MAIN CANVAS ── */
+  .canvas {
+    padding: 40px;
+    display: none;
+  }
+
+  .canvas.active { display: block; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal-mid);
+    margin-bottom: 24px;
+  }
+
+  .screens-row {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+
+  .screen-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .screen-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-400);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── MOBILE SHELL ── */
+  .mobile-shell {
+    width: 320px;
+    background: #1A1D2A;
+    border-radius: 44px;
+    padding: 14px;
+    box-shadow: 0 0 0 1px #2A2F40, 0 20px 60px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+  }
+
+  .mobile-screen {
+    width: 292px;
+    height: 580px;
+    border-radius: 32px;
+    background: var(--gray-100);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── WEB SHELL ── */
+  .web-shell {
+    background: #1A1D2A;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 0 0 1px #2A2F40, 0 20px 60px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+  }
+
+  .web-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px 10px;
+  }
+
+  .web-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .web-dot.r { background: #E04545; }
+  .web-dot.y { background: #E8A838; }
+  .web-dot.g { background: #0A7B6C; }
+
+  .web-url {
+    flex: 1;
+    background: #0E1117;
+    border-radius: 6px;
+    height: 22px;
+    margin: 0 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    font-size: 10px;
+    color: var(--gray-400);
+    font-family: monospace;
+  }
+
+  .web-screen {
+    width: 780px;
+    height: 520px;
+    border-radius: 8px;
+    background: var(--white);
+    overflow: hidden;
+    display: flex;
+  }
+
+  /* ══════════════════════════════════
+     MOBILE SCREENS
+  ══════════════════════════════════ */
+
+  /* Status bar */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-900);
+    flex-shrink: 0;
+  }
+
+  .status-icons { display: flex; gap: 4px; align-items: center; }
+  .status-icons span { font-size: 10px; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    display: flex;
+    background: var(--white);
+    border-top: 1px solid var(--gray-200);
+    padding: 8px 0 12px;
+    flex-shrink: 0;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+  }
+
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    padding: 4px 0;
+  }
+
+  .nav-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .nav-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    opacity: 0;
+  }
+
+  .nav-item.active .nav-dot { opacity: 1; }
+  .nav-item.active .nav-icon { color: var(--teal); }
+  .nav-label { font-size: 9px; color: var(--gray-400); font-weight: 500; }
+  .nav-item.active .nav-label { color: var(--teal); }
+
+  /* Scrollable content area */
+  .screen-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+  }
+  .screen-content::-webkit-scrollbar { display: none; }
+
+  /* ── M1: TODAY ── */
+  .m-header {
+    padding: 12px 16px 8px;
+    background: var(--white);
+  }
+
+  .m-greeting { font-size: 11px; color: var(--gray-400); font-weight: 400; }
+  .m-name { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--gray-900); margin-top: 1px; }
+  .m-date { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+
+  .m-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .m-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--teal-mid));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .m-section { padding: 12px 16px 0; }
+  .m-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-400);
+    margin-bottom: 10px;
+  }
+
+  /* Health ring card */
+  .health-card {
+    background: linear-gradient(135deg, var(--teal) 0%, #0D9B8A 100%);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+
+  .health-ring {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+  }
+
+  .health-ring svg { width: 56px; height: 56px; transform: rotate(-90deg); }
+
+  .health-info { flex: 1; }
+  .health-score { font-size: 28px; font-weight: 700; line-height: 1; }
+  .health-label { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+  .health-sub { font-size: 10px; opacity: 0.65; margin-top: 4px; }
+
+  /* Metric pills */
+  .metrics-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .metric-pill {
+    flex: 1;
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    padding: 10px 10px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+  }
+
+  .metric-icon { font-size: 14px; margin-bottom: 4px; }
+  .metric-val { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+  .metric-unit { font-size: 9px; color: var(--gray-400); }
+  .metric-name { font-size: 9px; color: var(--gray-400); margin-top: 1px; }
+
+  /* Med card */
+  .med-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+  }
+
+  .med-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .med-icon.blue { background: var(--blue-light); }
+  .med-icon.teal { background: var(--teal-light); }
+  .med-icon.amber { background: var(--amber-light); }
+
+  .med-info { flex: 1; }
+  .med-name { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+  .med-dose { font-size: 11px; color: var(--gray-400); }
+
+  .med-time {
+    font-size: 10px;
+    color: var(--gray-400);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .med-badge {
+    font-size: 9px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .med-badge.done { background: var(--teal-light); color: var(--teal); }
+  .med-badge.pending { background: var(--amber-light); color: var(--amber); }
+  .med-badge.upcoming { background: var(--gray-100); color: var(--gray-400); }
+
+  /* Alert banner */
+  .alert-banner {
+    background: var(--amber-light);
+    border: 1px solid #F0C870;
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .alert-icon { font-size: 14px; flex-shrink: 0; }
+  .alert-text { font-size: 11px; color: #8A6210; line-height: 1.4; }
+  .alert-text strong { font-weight: 600; }
+
+  /* ── M2: HEALTH TRENDS ── */
+  .chart-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .chart-title { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+  .chart-period {
+    font-size: 10px;
+    color: var(--teal);
+    background: var(--teal-light);
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .mini-chart {
+    height: 64px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .chart-bar {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+    position: relative;
+  }
+
+  .chart-line-svg {
+    width: 100%;
+    height: 64px;
+  }
+
+  .chart-stats {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--gray-200);
+  }
+
+  .chart-stat { flex: 1; }
+  .stat-val { font-size: 16px; font-weight: 700; color: var(--gray-900); }
+  .stat-label { font-size: 10px; color: var(--gray-400); }
+  .stat-change { font-size: 10px; margin-top: 1px; }
+  .stat-change.up { color: var(--teal); }
+  .stat-change.down { color: var(--red); }
+  .stat-change.neutral { color: var(--amber); }
+
+  /* Log button */
+  .log-btn {
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 14px;
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  /* ── M3: MEDICATIONS ── */
+  .progress-ring-wrap {
+    background: var(--teal-light);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+
+  .progress-ring-wrap svg { width: 56px; height: 56px; flex-shrink: 0; }
+
+  .med-progress-info .big-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--teal);
+    line-height: 1;
+  }
+
+  .med-progress-info .sub { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+
+  .time-slot {
+    margin-bottom: 14px;
+  }
+
+  .time-slot-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-400);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .time-slot-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-200);
+  }
+
+  /* ── M4: DOCTOR ── */
+  .appt-card {
+    background: linear-gradient(135deg, var(--blue) 0%, #4A90D9 100%);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    color: white;
+    margin-bottom: 10px;
+  }
+
+  .appt-label { font-size: 10px; opacity: 0.75; text-transform: uppercase; letter-spacing: 1px; }
+  .appt-name { font-family: 'DM Serif Display', serif; font-size: 18px; margin-top: 4px; }
+  .appt-details { display: flex; gap: 12px; margin-top: 8px; }
+  .appt-detail { font-size: 11px; opacity: 0.85; display: flex; align-items: center; gap: 4px; }
+
+  .msg-bubble {
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    max-width: 85%;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .msg-bubble.doctor {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    color: var(--gray-900);
+    align-self: flex-start;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .msg-bubble.patient {
+    background: var(--teal);
+    color: white;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+
+  .msg-time { font-size: 9px; color: var(--gray-400); margin-top: 3px; }
+  .msg-time.patient { color: rgba(255,255,255,0.65); }
+
+  .msg-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .msg-input-bar {
+    background: var(--white);
+    border-top: 1px solid var(--gray-200);
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .msg-input {
+    flex: 1;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--gray-400);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .msg-send {
+    width: 32px;
+    height: 32px;
+    background: var(--teal);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* ── M5: LOG SYMPTOM FLOW ── */
+  .flow-step {
+    padding: 16px;
+  }
+
+  .flow-progress {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+
+  .flow-dot {
+    flex: 1;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--gray-200);
+  }
+
+  .flow-dot.done { background: var(--teal); }
+
+  .flow-question {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--gray-900);
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .symptom-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .symptom-chip {
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .symptom-chip.selected {
+    border-color: var(--teal);
+    background: var(--teal-light);
+  }
+
+  .symptom-chip .chip-icon { font-size: 20px; }
+  .symptom-chip .chip-label { font-size: 11px; font-weight: 500; color: var(--gray-900); text-align: center; }
+
+  .severity-scale {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .sev-btn {
+    flex: 1;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--gray-200);
+    background: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .sev-btn:nth-child(1) { color: var(--teal); }
+  .sev-btn:nth-child(2) { color: #7DC4BD; }
+  .sev-btn:nth-child(3) { color: var(--amber); }
+  .sev-btn:nth-child(4) { color: #E07B38; }
+  .sev-btn:nth-child(5) { color: var(--red); border-color: var(--red); background: var(--red-light); }
+
+  .primary-btn {
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: auto;
+  }
+
+  /* ══════════════════════════════════
+     WEB SCREENS
+  ══════════════════════════════════ */
+
+  /* Sidebar */
+  .web-sidebar {
+    width: 200px;
+    flex-shrink: 0;
+    background: var(--gray-900);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+  }
+
+  .wb-logo {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 16px;
+  }
+
+  .wb-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: white;
+  }
+
+  .wb-logo-text span { color: var(--teal-mid); }
+
+  .wb-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+
+  .wb-nav-item.active {
+    color: white;
+    border-left-color: var(--teal-mid);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .wb-nav-icon { font-size: 15px; width: 18px; text-align: center; }
+
+  .wb-user {
+    margin-top: auto;
+    padding: 14px 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .wb-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--teal-mid));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: white;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .wb-user-info .wb-user-name { font-size: 12px; color: white; font-weight: 500; }
+  .wb-user-info .wb-user-sub { font-size: 10px; color: rgba(255,255,255,0.4); }
+
+  /* Web main content */
+  .web-main {
+    flex: 1;
+    background: var(--gray-100);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .web-topbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .web-page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--gray-900);
+  }
+
+  .web-topbar-actions { display: flex; gap: 8px; align-items: center; }
+
+  .wb-btn {
+    padding: 7px 14px;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+  }
+
+  .wb-btn.primary { background: var(--teal); color: white; }
+  .wb-btn.secondary { background: var(--gray-200); color: var(--gray-600); }
+
+  .web-content {
+    flex: 1;
+    padding: 20px 24px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 14px;
+    align-content: start;
+  }
+
+  .web-content.dashboard-grid {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .wb-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+  }
+
+  .wb-card.span2 { grid-column: span 2; }
+  .wb-card.span3 { grid-column: span 3; }
+
+  .wb-card-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+  }
+
+  /* KPI row */
+  .kpi-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--gray-900);
+    line-height: 1;
+  }
+
+  .kpi-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+  .kpi-change { font-size: 11px; margin-top: 6px; display: flex; align-items: center; gap: 4px; }
+  .kpi-change.pos { color: var(--teal); }
+  .kpi-change.neg { color: var(--red); }
+
+  /* Web chart placeholder */
+  .web-chart-area {
+    height: 120px;
+    position: relative;
+    margin-top: 8px;
+  }
+
+  .web-chart-area svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Web med list */
+  .wb-med-row {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--gray-100);
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .wb-med-row:last-child { border-bottom: none; }
+
+  .wb-med-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .wb-med-name { flex: 1; color: var(--gray-900); font-weight: 500; }
+  .wb-med-time { color: var(--gray-400); font-size: 11px; }
+
+  /* Web appointment */
+  .wb-appt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .wb-appt:last-child { border-bottom: none; }
+
+  .wb-appt-date {
+    width: 40px;
+    height: 44px;
+    background: var(--teal-light);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .wb-appt-day { font-size: 16px; font-weight: 700; color: var(--teal); line-height: 1; }
+  .wb-appt-mon { font-size: 9px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .wb-appt-info { flex: 1; }
+  .wb-appt-dr { font-size: 12px; font-weight: 600; color: var(--gray-900); }
+  .wb-appt-type { font-size: 11px; color: var(--gray-400); }
+
+  /* Onboarding mobile */
+  .onboard-screen {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px 16px 16px;
+  }
+
+  .onboard-illustration {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  .onboard-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal-light), #C8EDE9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    position: relative;
+  }
+
+  .onboard-circle::before {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 1.5px dashed var(--teal-mid);
+    opacity: 0.4;
+  }
+
+  .onboard-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--gray-900);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .onboard-sub {
+    font-size: 13px;
+    color: var(--gray-400);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .onboard-dots {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .onboard-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gray-200);
+  }
+
+  .onboard-dot.active {
+    width: 20px;
+    border-radius: 3px;
+    background: var(--teal);
+  }
+
+  /* ── DIVIDER / INFO SECTIONS ── */
+  .info-section {
+    background: #13161F;
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-bottom: 40px;
+    border: 1px solid #1E2330;
+  }
+
+  .info-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .info-section p {
+    font-size: 14px;
+    color: var(--gray-400);
+    line-height: 1.7;
+    max-width: 700px;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .info-card {
+    background: #1A1D2A;
+    border-radius: 12px;
+    padding: 18px;
+    border: 1px solid #2A2F3F;
+  }
+
+  .info-card-icon { font-size: 24px; margin-bottom: 10px; }
+  .info-card h3 { font-size: 14px; font-weight: 600; color: white; margin-bottom: 6px; }
+  .info-card p { font-size: 12px; color: var(--gray-400); line-height: 1.6; }
+
+  /* decision callout */
+  .decision-card {
+    background: linear-gradient(135deg, #0A1F1C 0%, #0D2B26 100%);
+    border: 1px solid rgba(91, 181, 168, 0.25);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+
+  .decision-title { font-size: 13px; font-weight: 700; color: var(--teal-mid); margin-bottom: 6px; }
+  .decision-text { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  /* ── WIREFRAME ANNOTATION ── */
+  .annotation {
+    position: absolute;
+    background: #E8A838;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  /* Colors legend */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+  }
+
+  /* TYPOGRAPHY SYSTEM section */
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid #1E2330;
+  }
+
+  .type-row:last-child { border-bottom: none; }
+  .type-name { font-size: 11px; color: var(--gray-400); width: 120px; flex-shrink: 0; }
+  .type-sample { color: white; }
+  .type-specs { font-size: 10px; color: #3A3F52; margin-left: auto; font-family: monospace; }
+
+  /* Color swatches */
+  .swatches { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+  .swatch {
+    width: 70px;
+    text-align: center;
+  }
+
+  .swatch-color {
+    width: 70px;
+    height: 48px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .swatch-name { font-size: 10px; color: var(--gray-400); }
+  .swatch-hex { font-size: 9px; color: #3A3F52; font-family: monospace; }
+
+  /* Flow diagram */
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: #13161F;
+    border-radius: 12px;
+    border: 1px solid #1E2330;
+    margin-bottom: 32px;
+  }
+
+  .flow-node {
+    background: #1A1D2A;
+    border: 1px solid #2A2F3F;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    min-width: 90px;
+  }
+
+  .flow-node.start { background: var(--teal); border-color: var(--teal); }
+  .flow-node.end { background: #1A1D2A; border-color: var(--teal-mid); color: var(--teal-mid); }
+  .flow-arrow { color: var(--gray-400); font-size: 14px; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .canvas { padding: 20px; }
+    .site-header { padding: 16px 20px; }
+    .screens-row { gap: 20px; }
+    .web-shell { display: none; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+
+  .button {
+    width: 20em;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="site-logo">Medi<span>Path</span></div>
+  <div class="view-tabs">
+    <button class="view-tab active" onclick="switchView('mobile')">📱 Mobile</button>
+    <button class="view-tab" onclick="switchView('web')">🖥 Web</button>
+    <button class="view-tab" onclick="switchView('system')">🎨 Design System</button>
+    <button class="view-tab" onclick="switchView('flow')">🔀 User Flow</button>
+  </div>
+  <div class="badge">Case Study Wireframes MediPath</div>
+</header>
+
+<!-- ══════════ MOBILE VIEW ══════════ -->
+<div class="canvas active" id="canvas-mobile">
+
+  <div class="info-section">
+    <h2>Mobile Wireframes 5 key screens</h2>
+    <p>Responsive health companion for patients managing chronic conditions. Mobile-first approach the primary use context is quick daily check-ins, not extended sessions. Navigation is persistent and always reachable with one thumb.</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon">🎯</div>
+        <h3>Primary User</h3>
+        <p>Sara, 45: manages diabetes + hypertension. Tech-comfortable but time poor. Uses phone throughout the day.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📐</div>
+        <h3>Design Principle</h3>
+        <p>Ambient awareness over active engagement. Data should surface on its own logging should never take more than 30 seconds.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🎨</div>
+        <h3>Color Logic</h3>
+        <p>Blue = routine info. Amber = needs attention. Red = urgent only. Never use red for chronic reminders it causes anxiety.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREENS ROW 1 -->
+  <div class="section-label">Screen 1–3 · Daily Overview, Health Trends, Medications</div>
+  <div class="screens-row">
+
+    <!-- M1: TODAY -->
+    <div class="screen-wrap">
+      <div class="mobile-shell">
+        <div class="mobile-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+          </div>
+
+          <div class="m-header">
+            <div class="m-header-row">
+              <div>
+                <div class="m-greeting">Good morning,</div>
+                <div class="m-name">Sara 👋</div>
+                <div class="m-date">Monday, 28 April</div>
+              </div>
+              <div class="m-avatar">S</div>
+            </div>
+          </div>
+
+          <div class="screen-content">
+            <div class="m-section">
+              <div class="health-card">
+                <div class="health-ring">
+                  <svg viewBox="0 0 56 56">
+                    <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="5"/>
+                    <circle cx="28" cy="28" r="22" fill="none" stroke="white" stroke-width="5"
+                      stroke-dasharray="104" stroke-dashoffset="26" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="health-info">
+                  <div class="health-score">78</div>
+                  <div class="health-label">Health Score</div>
+                  <div class="health-sub">↑ +4 from yesterday</div>
+                </div>
+              </div>
+
+              <div class="metrics-row">
+                <div class="metric-pill">
+                  <div class="metric-icon">❤️</div>
+                  <div class="metric-val">118<span class="metric-unit">/76</span></div>
+                  <div class="metric-name">Blood Pressure</div>
+                </div>
+                <div class="metric-pill">
+                  <div class="metric-icon">🩸</div>
+                  <div class="metric-val">6.2<span class="metric-unit">%</span></div>
+                  <div class="metric-name">HbA1c</div>
+                </div>
+                <div class="metric-pill">
+                  <div class="metric-icon">👟</div>
+                  <div class="metric-val">4.2<span class="metric-unit">k</span></div>
+                  <div class="metric-name">Steps</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="m-section">
+              <div class="m-section-title">Today's Medications</div>
+              <div class="alert-banner">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-text"><strong>Metformin</strong> due in 30 min. Don't forget with food.</div>
+              </div>
+              <div class="med-card">
+                <div class="med-icon teal">💊</div>
+                <div class="med-info">
+                  <div class="med-name">Metformin</div>
+                  <div class="med-dose">500mg · With breakfast</div>
+                </div>
+                <div class="med-time">
+                  <span>08:00</span>
+                  <span class="med-badge done">✓ Done</span>
+                </div>
+              </div>
+              <div class="med-card">
+                <div class="med-icon amber">💊</div>
+                <div class="med-info">
+                  <div class="med-name">Lisinopril</div>
+                  <div class="med-dose">10mg · With lunch</div>
+                </div>
+                <div class="med-time">
+                  <span>13:00</span>
+                  <span class="med-badge pending">Now</span>
+                </div>
+              </div>
+              <div class="med-card">
+                <div class="med-icon blue">💊</div>
+                <div class="med-info">
+                  <div class="med-name">Atorvastatin</div>
+                  <div class="med-dose">20mg · Evening</div>
+                </div>
+                <div class="med-time">
+                  <span>21:00</span>
+                  <span class="med-badge upcoming">Later</span>
+                </div>
+              </div>
+            </div>
+            <div style="height:12px"></div>
+          </div>
+
+          <div class="bottom-nav">
+            <div class="nav-item active">
+              <div class="nav-icon">🏠</div>
+              <div class="nav-label">Today</div>
+              <div class="nav-dot"></div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">📊</div>
+              <div class="nav-label">Health</div>
+              <div class="nav-dot"></div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">💊</div>
+              <div class="nav-label">Meds</div>
+              <div class="nav-dot"></div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">👩‍⚕️</div>
+              <div class="nav-label">Doctor</div>
+              <div class="nav-dot"></div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">👤</div>
+              <div class="nav-label">Profile</div>
+              <div class="nav-dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">1 / Today Dashboard</div>
+    </div>
+
+    <!-- M2: HEALTH TRENDS -->
+    <div class="screen-wrap">
+      <div class="mobile-shell">
+        <div class="mobile-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+          </div>
+
+          <div class="m-header">
+            <div class="m-header-row">
+              <div>
+                <div class="m-greeting">Your</div>
+                <div class="m-name">Health Trends</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="screen-content">
+            <div class="m-section">
+              <div class="chart-card">
+                <div class="chart-header">
+                  <div class="chart-title">Blood Pressure</div>
+                  <div class="chart-period">7 days</div>
+                </div>
+                <svg class="chart-line-svg" viewBox="0 0 260 64">
+                  <defs>
+                    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#0A7B6C" stop-opacity="0.2"/>
+                      <stop offset="100%" stop-color="#0A7B6C" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,44 L37,36 L74,40 L111,28 L148,32 L185,24 L222,28 L260,20" fill="none" stroke="#0A7B6C" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M0,44 L37,36 L74,40 L111,28 L148,32 L185,24 L222,28 L260,20 L260,64 L0,64 Z" fill="url(#g1)"/>
+                  <circle cx="260" cy="20" r="4" fill="#0A7B6C"/>
+                </svg>
+                <div class="chart-stats">
+                  <div class="chart-stat">
+                    <div class="stat-val">118/76</div>
+                    <div class="stat-label">Latest</div>
+                    <div class="stat-change up">↓ Improving</div>
+                  </div>
+                  <div class="chart-stat">
+                    <div class="stat-val">124/80</div>
+                    <div class="stat-label">7-day avg</div>
+                    <div class="stat-change neutral">→ Stable</div>
+                  </div>
+                  <div class="chart-stat">
+                    <div class="stat-val">138/88</div>
+                    <div class="stat-label">Last month</div>
+                    <div class="stat-change up">↓ Better</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-card">
+                <div class="chart-header">
+                  <div class="chart-title">Blood Glucose</div>
+                  <div class="chart-period">30 days</div>
+                </div>
+                <div class="mini-chart">
+                  <div class="chart-bar" style="height:55%;background:var(--teal-light)"></div>
+                  <div class="chart-bar" style="height:70%;background:var(--teal-light)"></div>
+                  <div class="chart-bar" style="height:60%;background:var(--teal-light)"></div>
+                  <div class="chart-bar" style="height:80%;background:var(--amber-light)"></div>
+                  <div class="chart-bar" style="height:65%;background:var(--teal-light)"></div>
+                  <div class="chart-bar" style="height:50%;background:var(--teal-light)"></div>
+                  <div class="chart-bar" style="height:75%;background:var(--amber-light)"></div>
+                  <div class="chart-bar" style="height:55%;background:var(--teal)"></div>
+                </div>
+                <div class="chart-stats">
+                  <div class="chart-stat">
+                    <div class="stat-val">6.2%</div>
+                    <div class="stat-label">HbA1c</div>
+                    <div class="stat-change up">↓ Target met</div>
+                  </div>
+                  <div class="chart-stat">
+                    <div class="stat-val">7.1</div>
+                    <div class="stat-label">Avg fasting</div>
+                    <div class="stat-change neutral">→ On track</div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="log-btn">＋ Log Symptom or Reading</button>
+            </div>
+          </div>
+
+          <div class="bottom-nav">
+            <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-label">Today</div><div class="nav-dot"></div></div>
+            <div class="nav-item active"><div class="nav-icon">📊</div><div class="nav-label">Health</div><div class="nav-dot"></div></div>
+            <div class="nav-item"><div class="nav-icon">💊</div><div class="nav-label">Meds</div><div class="nav-dot"></div></div>
+            <div class="nav-item"><div class="nav-icon">👩‍⚕️</div><div class="nav-label">Doctor</div><div class="nav-dot"></div></div>
+            <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-label">Profile</div><div class="nav-dot"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">2 / Health Trends</div>
+    </div>
+
+    <!-- M3: MEDICATIONS -->
+    <div class="screen-wrap">
+      <div class="mobile-shell">
+        <div class="mobile-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+          </div>
+
+          <div class="m-header">
+            <div class="m-header-row">
+              <div>
+                <div class="m-greeting">Your</div>
+                <div class="m-name">Medications</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="screen-content">
+            <div class="m-section">
+              <div class="progress-ring-wrap">
+                <svg viewBox="0 0 56 56" style="transform:rotate(-90deg)">
+                  <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(10,123,108,0.2)" stroke-width="5"/>
+                  <circle cx="28" cy="28" r="22" fill="none" stroke="#0A7B6C" stroke-width="5"
+                    stroke-dasharray="138.2" stroke-dashoffset="46" stroke-linecap="round"/>
+                </svg>
+                <div class="med-progress-info">
+                  <div class="big-num">2/3</div>
+                  <div class="sub">taken today</div>
+                  <div style="font-size:11px;color:var(--gray-400);margin-top:4px">67% adherence today</div>
+                </div>
+              </div>
+
+              <div class="time-slot">
+                <div class="time-slot-label">Morning · 8:00 AM</div>
+                <div class="med-card">
+                  <div class="med-icon teal">💊</div>
+                  <div class="med-info">
+                    <div class="med-name">Metformin 500mg</div>
+                    <div class="med-dose">With food · Refill in 12 days</div>
+                  </div>
+                  <div class="med-time"><span class="med-badge done">✓ Done</span></div>
+                </div>
+              </div>
+
+              <div class="time-slot">
+                <div class="time-slot-label">Afternoon · 1:00 PM</div>
+                <div class="med-card">
+                  <div class="med-icon amber">💊</div>
+                  <div class="med-info">
+                    <div class="med-name">Lisinopril 10mg</div>
+                    <div class="med-dose">For blood pressure</div>
+                  </div>
+                  <div class="med-time"><span class="med-badge pending">Due Now</span></div>
+                </div>
+              </div>
+
+              <div class="time-slot">
+                <div class="time-slot-label">Evening · 9:00 PM</div>
+                <div class="med-card">
+                  <div class="med-icon blue">💊</div>
+                  <div class="med-info">
+                    <div class="med-name">Atorvastatin 20mg</div>
+                    <div class="med-dose">Cholesterol · With dinner</div>
+                  </div>
+                  <div class="med-time"><span class="med-badge upcoming">Later</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bottom-nav">
+            <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-label">Today</div><div class="nav-dot"></div></div>
+            <div class="nav-item"><div class="nav-icon">📊</div><div class="nav-label">Health</div><div class="nav-dot"></div></div>
+            <div class="nav-item active"><div class="nav-icon">💊</div><div class="nav-label">Meds</div><div class="nav-dot"></div></div>
+            <div class="nav-item"><div class="nav-icon">👩‍⚕️</div><div class="nav-label">Doctor</div><div class="nav-dot"></div></div>
+            <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-label">Profile</div><div class="nav-dot"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">3 / Medications</div>
+    </div>
+
+  </div>
+
+  <!-- DESIGN DECISIONS -->
+  <div class="info-section">
+    <h2>Design Decisions Screens 1–3</h2>
+    <p>Each decision has a rationale. These are what you explain in your case study to show senior-level thinking.</p>
+    <div style="margin-top:20px">
+      <div class="decision-card">
+        <div class="decision-title">Decision 1 Persistent bottom navigation (5 items)</div>
+        <div class="decision-text">Early explorations used hamburger menu to save screen space. Testing showed users switch between Today ↔ Medications 8–12 times per day. Hidden navigation created unnecessary friction for the most critical daily action. Moved to persistent bottom nav reachable with one thumb in any grip position.</div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-title">Decision 2 Health Score ring on Today screen</div>
+        <div class="decision-text">Tested three dashboard concepts: (A) list of metrics, (B) calendar view, (C) single composite score. Score resonated most in testing it gives a single "how am I doing today" answer without cognitive load. Detailed breakdown is one tap away for users who want it.</div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-title">Decision 3 Amber for "due now", not red</div>
+        <div class="decision-text">Chronic condition patients see alerts constantly. Red creates anxiety and alarm fatigue users start ignoring red notifications. Amber signals "this needs your attention" without triggering stress. Red is reserved exclusively for truly urgent situations (dangerously high readings).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREENS ROW 2 -->
+  <div class="section-label">Screen 4–5 · Doctor Communication + Symptom Log Flow</div>
+  <div class="screens-row">
+
+    <!-- M4: DOCTOR -->
+    <div class="screen-wrap">
+      <div class="mobile-shell">
+        <div class="mobile-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+          </div>
+
+          <div class="m-header">
+            <div class="m-header-row">
+              <div>
+                <div class="m-greeting">Your</div>
+                <div class="m-name">Care Team</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="screen-content">
+            <div class="m-section">
+              <div class="appt-card">
+                <div class="appt-label">Next Appointment</div>
+                <div class="appt-name">Dr. van der Berg</div>
+                <div class="appt-details">
+                  <div class="appt-detail">📅 May 12, 10:00 AM</div>
+                  <div class="appt-detail">🏥 Amsterdam UMC</div>
+                </div>
+              </div>
+
+              <div class="m-section-title" style="margin-top:4px">Messages</div>
+
+              <div class="msg-thread">
+                <div>
+                  <div class="msg-bubble doctor">Your last HbA1c result looks good 6.2%. Keep up the routine. Any new symptoms this week?</div>
+                  <div class="msg-time">Dr. van der Berg · Yesterday</div>
+                </div>
+                <div style="margin-top:8px">
+                  <div class="msg-bubble patient">Feeling some fatigue in the afternoons. Blood pressure was a bit high Monday but normalized by evening.</div>
+                  <div class="msg-time patient" style="text-align:right">You · Yesterday</div>
+                </div>
+                <div style="margin-top:8px">
+                  <div class="msg-bubble doctor">Thanks for logging that. Let's discuss at the appointment. Continue monitoring BP daily.</div>
+                  <div class="msg-time">Dr. van der Berg · Today 8:15</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="msg-input-bar">
+            <div class="msg-input">Message your doctor...</div>
+            <button class="msg-send">↑</button>
+          </div>
+
+          <div class="bottom-nav">
+            <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-label">Today</div><div class="nav-dot"></div></div>
+            <div class="nav-item"><div class="nav-icon">📊</div><div class="nav-label">Health</div><div class="nav-dot"></div></div>
+            <div class="nav-item"><div class="nav-icon">💊</div><div class="nav-label">Meds</div><div class="nav-dot"></div></div>
+            <div class="nav-item active"><div class="nav-icon">👩‍⚕️</div><div class="nav-label">Doctor</div><div class="nav-dot"></div></div>
+            <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-label">Profile</div><div class="nav-dot"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">4 / Doctor & Messages</div>
+    </div>
+
+    <!-- M5: LOG SYMPTOM -->
+    <div class="screen-wrap">
+      <div class="mobile-shell">
+        <div class="mobile-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+          </div>
+
+          <div class="flow-step" style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+            <div style="font-size:12px;color:var(--gray-400);margin-bottom:12px">← Back</div>
+            <div class="flow-progress">
+              <div class="flow-dot done"></div>
+              <div class="flow-dot done"></div>
+              <div class="flow-dot"></div>
+            </div>
+            <div class="flow-question">How severe is it right now?</div>
+
+            <div style="font-size:12px;color:var(--gray-600);margin-bottom:10px;font-weight:500">Selected: Fatigue, Headache</div>
+
+            <div style="font-size:11px;color:var(--gray-400);margin-bottom:8px">Severity scale (1-mild, 5-severe)</div>
+            <div class="severity-scale">
+              <div class="sev-btn">1</div>
+              <div class="sev-btn">2</div>
+              <div class="sev-btn">3</div>
+              <div class="sev-btn">4</div>
+              <div class="sev-btn" style="border-color:var(--red);background:var(--red-light);color:var(--red)">5</div>
+            </div>
+
+            <div style="font-size:11px;color:var(--gray-400);margin-bottom:6px">Any notes? (optional)</div>
+            <div style="background:var(--gray-100);border:1px solid var(--gray-200);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--gray-400);margin-bottom:auto;min-height:60px;">Tired after lunch, started around 2pm...</div>
+
+            <div style="margin-top:16px">
+              <button class="primary-btn">Save & Done ✓</button>
+              <div style="text-align:center;font-size:11px;color:var(--gray-400);margin-top:8px">Step 3 of 3 · Under 30 seconds</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">5 / Log Symptom Step 3/3</div>
+    </div>
+
+    <!-- M6: ONBOARDING -->
+    <div class="screen-wrap">
+      <div class="mobile-shell">
+        <div class="mobile-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+          </div>
+
+          <div class="onboard-screen">
+            <div style="text-align:right;font-size:12px;color:var(--gray-400)">Skip</div>
+            <div class="onboard-illustration">
+              <div class="onboard-circle">📊</div>
+            </div>
+            <div class="onboard-dots">
+              <div class="onboard-dot"></div>
+              <div class="onboard-dot active"></div>
+              <div class="onboard-dot"></div>
+              <div class="onboard-dot"></div>
+            </div>
+            <div class="onboard-title">Everything in one place</div>
+            <div class="onboard-sub">Medications, readings, symptoms and doctor messages finally connected in a way that makes sense.</div>
+            <button class="primary-btn">Continue →</button>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">6 / Onboarding Step 2</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ══════════ WEB VIEW ══════════ -->
+<div class="canvas" id="canvas-web">
+
+  <div class="info-section">
+    <h2>Web / Desktop Wireframes</h2>
+    <p>The web version serves a different use case longer sessions, data review, appointment preparation, and deeper health history. Sidebar navigation replaces bottom nav. Information density is higher because users are at a desk and have more cognitive bandwidth.</p>
+  </div>
+
+  <div class="section-label">Web Screen 1 · Patient Dashboard</div>
+  <div class="screens-row">
+    <div class="screen-wrap">
+      <div class="web-shell">
+        <div class="web-bar">
+          <div class="web-dot r"></div>
+          <div class="web-dot y"></div>
+          <div class="web-dot g"></div>
+          <div class="web-url">app.medipath.eu/dashboard</div>
+        </div>
+        <div class="web-screen">
+          <!-- Sidebar -->
+          <div class="web-sidebar">
+            <div class="wb-logo"><div class="wb-logo-text">Medi<span>Path</span></div></div>
+            <div class="wb-nav-item active"><div class="wb-nav-icon">🏠</div>Dashboard</div>
+            <div class="wb-nav-item"><div class="wb-nav-icon">📊</div>My Health</div>
+            <div class="wb-nav-item"><div class="wb-nav-icon">💊</div>Medications</div>
+            <div class="wb-nav-item"><div class="wb-nav-icon">👩‍⚕️</div>My Doctor</div>
+            <div class="wb-nav-item"><div class="wb-nav-icon">📋</div>Reports</div>
+            <div class="wb-nav-item"><div class="wb-nav-icon">⚙️</div>Settings</div>
+            <div class="wb-user">
+              <div class="wb-avatar">S</div>
+              <div class="wb-user-info">
+                <div class="wb-user-name">Sara M.</div>
+                <div class="wb-user-sub">Type 2 Diabetes</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main -->
+          <div class="web-main">
+            <div class="web-topbar">
+              <div class="web-page-title">Good morning, Sara 👋</div>
+              <div class="web-topbar-actions">
+                <button class="wb-btn secondary">📋 Generate Report</button>
+                <button class="wb-btn primary">＋ Log Reading</button>
+              </div>
+            </div>
+
+            <div class="web-content dashboard-grid">
+              <!-- KPI cards -->
+              <div class="wb-card">
+                <div class="wb-card-title">Health Score</div>
+                <div class="kpi-val">78</div>
+                <div class="kpi-sub">out of 100</div>
+                <div class="kpi-change pos">↑ +4 from yesterday</div>
+                <div class="web-chart-area" style="height:70px;margin-top:10px">
+                  <svg viewBox="0 0 200 70">
+                    <path d="M0,55 L28,48 L56,52 L84,38 L112,42 L140,30 L168,34 L200,22" fill="none" stroke="#0A7B6C" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M0,55 L28,48 L56,52 L84,38 L112,42 L140,30 L168,34 L200,22 L200,70 L0,70Z" fill="rgba(10,123,108,0.1)"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="wb-card">
+                <div class="wb-card-title">Blood Pressure</div>
+                <div class="kpi-val" style="font-size:26px">118/76</div>
+                <div class="kpi-sub">mmHg · 30 min ago</div>
+                <div class="kpi-change pos">↓ Improving this week</div>
+              </div>
+
+              <div class="wb-card">
+                <div class="wb-card-title">HbA1c</div>
+                <div class="kpi-val">6.2<span style="font-size:18px;color:var(--gray-400)">%</span></div>
+                <div class="kpi-sub">Last test: 3 weeks ago</div>
+                <div class="kpi-change pos">✓ Within target range</div>
+              </div>
+
+              <!-- Medications & Appointments -->
+              <div class="wb-card">
+                <div class="wb-card-title">Today's Medications</div>
+                <div class="wb-med-row">
+                  <div class="wb-med-icon" style="background:var(--teal-light)">💊</div>
+                  <div class="wb-med-name">Metformin 500mg</div>
+                  <div class="wb-med-time">08:00 ✓</div>
+                </div>
+                <div class="wb-med-row">
+                  <div class="wb-med-icon" style="background:var(--amber-light)">💊</div>
+                  <div class="wb-med-name">Lisinopril 10mg</div>
+                  <div class="wb-med-time" style="color:var(--amber);font-weight:600">Due now</div>
+                </div>
+                <div class="wb-med-row">
+                  <div class="wb-med-icon" style="background:var(--blue-light)">💊</div>
+                  <div class="wb-med-name">Atorvastatin 20mg</div>
+                  <div class="wb-med-time">21:00</div>
+                </div>
+              </div>
+
+              <div class="wb-card">
+                <div class="wb-card-title">Upcoming Appointments</div>
+                <div class="wb-appt">
+                  <div class="wb-appt-date">
+                    <div class="wb-appt-day">12</div>
+                    <div class="wb-appt-mon">May</div>
+                  </div>
+                  <div class="wb-appt-info">
+                    <div class="wb-appt-dr">Dr. van der Berg</div>
+                    <div class="wb-appt-type">General Check-up · 10:00 AM</div>
+                  </div>
+                </div>
+                <div class="wb-appt">
+                  <div class="wb-appt-date" style="background:var(--blue-light)">
+                    <div class="wb-appt-day" style="color:var(--blue)">28</div>
+                    <div class="wb-appt-mon" style="color:var(--blue)">May</div>
+                  </div>
+                  <div class="wb-appt-info">
+                    <div class="wb-appt-dr">Lab Tests</div>
+                    <div class="wb-appt-type">Blood work · Amsterdam UMC</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Web 1 / Patient Dashboard</div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:16px">Web Screen 2 · Health Analytics</div>
+  <div class="screens-row">
+    <div class="screen-wrap">
+      <div class="web-shell">
+        <div class="web-bar">
+          <div class="web-dot r"></div><div class="web-dot y"></div><div class="web-dot g"></div>
+          <div class="web-url">app.medipath.eu/health</div>
+        </div>
+        <div class="web-screen">
+          <div class="web-sidebar">
+            <div class="wb-logo"><div class="wb-logo-text">Medi<span>Path</span></div></div>
+            <div class="wb-nav-item"><div class="wb-nav-icon">🏠</div>Dashboard</div>
+            <div class="wb-nav-item active"><div class="wb-nav-icon">📊</div>My Health</div>
+            <div class="wb-nav-item"><div class="wb-nav-icon">💊</div>Medications</div>
+            <div class="wb-nav-item"><div class="wb-nav-icon">👩‍⚕️</div>My Doctor</div>
+            <div class="wb-nav-item"><div class="wb-nav-icon">📋</div>Reports</div>
+            <div class="wb-nav-item"><div class="wb-nav-icon">⚙️</div>Settings</div>
+            <div class="wb-user">
+              <div class="wb-avatar">S</div>
+              <div class="wb-user-info"><div class="wb-user-name">Sara M.</div><div class="wb-user-sub">Type 2 Diabetes</div></div>
+            </div>
+          </div>
+
+          <div class="web-main">
+            <div class="web-topbar">
+              <div class="web-page-title">Health Analytics</div>
+              <div class="web-topbar-actions">
+                <button class="wb-btn secondary">Last 30 days ▾</button>
+                <button class="wb-btn primary">Export PDF</button>
+              </div>
+            </div>
+            <div class="web-content" style="grid-template-columns:1fr 1fr;grid-template-rows:auto auto">
+
+              <div class="wb-card span2">
+                <div class="wb-card-title">Blood Pressure 30 Day Trend</div>
+                <div class="web-chart-area" style="height:110px">
+                  <svg viewBox="0 0 720 110" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#0A7B6C" stop-opacity="0.15"/>
+                        <stop offset="100%" stop-color="#0A7B6C" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- Systolic -->
+                    <path d="M0,70 L50,65 L100,72 L150,58 L200,62 L250,50 L300,55 L350,48 L400,52 L450,44 L500,48 L550,40 L600,43 L650,36 L720,32"
+                      fill="none" stroke="#0A7B6C" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M0,70 L50,65 L100,72 L150,58 L200,62 L250,50 L300,55 L350,48 L400,52 L450,44 L500,48 L550,40 L600,43 L650,36 L720,32 L720,110 L0,110Z"
+                      fill="url(#g2)"/>
+                    <!-- Diastolic -->
+                    <path d="M0,88 L50,85 L100,90 L150,82 L200,84 L250,78 L300,80 L350,76 L400,78 L450,72 L500,74 L550,70 L600,72 L650,66 L720,62"
+                      fill="none" stroke="#5BB5A8" stroke-width="1.5" stroke-dasharray="5,3" stroke-linecap="round"/>
+                    <!-- Target line -->
+                    <line x1="0" y1="60" x2="720" y2="60" stroke="#E8A838" stroke-width="1" stroke-dasharray="8,4" opacity="0.6"/>
+                    <text x="8" y="56" fill="#E8A838" font-size="9" opacity="0.8">Target 120</text>
+                  </svg>
+                </div>
+                <div class="chart-stats" style="border-top:1px solid var(--gray-200);padding-top:10px;margin-top:10px">
+                  <div class="chart-stat"><div class="stat-val">118/76</div><div class="stat-label">Latest reading</div><div class="stat-change up">↓ Best this month</div></div>
+                  <div class="chart-stat"><div class="stat-val">126/82</div><div class="stat-label">Monthly average</div><div class="stat-change neutral">→ Near target</div></div>
+                  <div class="chart-stat"><div class="stat-val">14</div><div class="stat-label">Days in range</div><div class="stat-change up">↑ +3 vs last month</div></div>
+                  <div class="chart-stat"><div class="stat-val">138/90</div><div class="stat-label">Month high</div><div class="stat-change down">↑ April 3rd</div></div>
+                </div>
+              </div>
+
+              <div class="wb-card">
+                <div class="wb-card-title">Blood Glucose History</div>
+                <div class="web-chart-area" style="height:90px;display:flex;align-items:flex-end;gap:5px">
+                  <div style="flex:1;height:55%;background:var(--teal-light);border-radius:3px 3px 0 0"></div>
+                  <div style="flex:1;height:70%;background:var(--teal-light);border-radius:3px 3px 0 0"></div>
+                  <div style="flex:1;height:60%;background:var(--teal-light);border-radius:3px 3px 0 0"></div>
+                  <div style="flex:1;height:85%;background:var(--amber-light);border-radius:3px 3px 0 0;border:1px solid var(--amber)"></div>
+                  <div style="flex:1;height:65%;background:var(--teal-light);border-radius:3px 3px 0 0"></div>
+                  <div style="flex:1;height:55%;background:var(--teal-light);border-radius:3px 3px 0 0"></div>
+                  <div style="flex:1;height:50%;background:var(--teal);border-radius:3px 3px 0 0"></div>
+                </div>
+              </div>
+
+              <div class="wb-card">
+                <div class="wb-card-title">Symptom Log Summary</div>
+                <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+                  <div style="display:flex;align-items:center;gap:8px;font-size:12px">
+                    <span>😴 Fatigue</span>
+                    <div style="flex:1;height:6px;background:var(--gray-200);border-radius:3px">
+                      <div style="width:70%;height:100%;background:var(--amber);border-radius:3px"></div>
+                    </div>
+                    <span style="color:var(--gray-400)">7x</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;font-size:12px">
+                    <span>🤕 Headache</span>
+                    <div style="flex:1;height:6px;background:var(--gray-200);border-radius:3px">
+                      <div style="width:40%;height:100%;background:var(--teal);border-radius:3px"></div>
+                    </div>
+                    <span style="color:var(--gray-400)">4x</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;font-size:12px">
+                    <span>😵 Dizziness</span>
+                    <div style="flex:1;height:6px;background:var(--gray-200);border-radius:3px">
+                      <div style="width:20%;height:100%;background:var(--blue);border-radius:3px"></div>
+                    </div>
+                    <span style="color:var(--gray-400)">2x</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Web 2 / Health Analytics</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ DESIGN SYSTEM ══════════ -->
+<div class="canvas" id="canvas-system">
+
+  <div class="info-section">
+    <h2>Design System MediPath</h2>
+    <p>A lightweight design system built around clarity, accessibility, and emotional safety. The system avoids anxiety-inducing patterns common in medical apps every color and component choice has a reason grounded in the user's emotional state.</p>
+  </div>
+
+  <div class="section-label">Color Palette</div>
+  <div class="info-section">
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-color" style="background:#0A7B6C"></div><div class="swatch-name">Teal Primary</div><div class="swatch-hex">#0A7B6C</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#5BB5A8"></div><div class="swatch-name">Teal Mid</div><div class="swatch-hex">#5BB5A8</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E8F5F3"></div><div class="swatch-name">Teal Light</div><div class="swatch-hex">#E8F5F3</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E8A838"></div><div class="swatch-name">Amber</div><div class="swatch-hex">#E8A838</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FEF6E4"></div><div class="swatch-name">Amber Light</div><div class="swatch-hex">#FEF6E4</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#2D6BE4"></div><div class="swatch-name">Blue Info</div><div class="swatch-hex">#2D6BE4</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E04545"></div><div class="swatch-name">Red Urgent</div><div class="swatch-hex">#E04545</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#1A1D2E"></div><div class="swatch-name">Gray 900</div><div class="swatch-hex">#1A1D2E</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F7F8FA;border:1px solid #eee"></div><div class="swatch-name">Gray 100</div><div class="swatch-hex">#F7F8FA</div></div>
+    </div>
+    <div style="margin-top:20px">
+      <div class="decision-card">
+        <div class="decision-title">Color Semantic System</div>
+        <div class="decision-text">
+          🟢 Teal = Routine, healthy, on-track. Used for: done states, good readings, primary actions.<br>
+          🟡 Amber = Attention needed, not urgent. Used for: upcoming meds, borderline readings, soft alerts.<br>
+          🔵 Blue = Informational, scheduled. Used for: appointments, messages, neutral data.<br>
+          🔴 Red = Urgent only. Used for: dangerous readings, missed critical meds. Never for routine reminders.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Typography</div>
+  <div class="info-section">
+    <div class="type-row">
+      <div class="type-name">Display / Serif</div>
+      <div class="type-sample" style="font-family:'DM Serif Display',serif;font-size:32px">Health Score</div>
+      <div class="type-specs">DM Serif Display · 32px · Regular</div>
+    </div>
+    <div class="type-row">
+      <div class="type-name">Page Title</div>
+      <div class="type-sample" style="font-family:'DM Serif Display',serif;font-size:22px">Good morning, Sara</div>
+      <div class="type-specs">DM Serif Display · 22px · Regular</div>
+    </div>
+    <div class="type-row">
+      <div class="type-name">Card Title</div>
+      <div class="type-sample" style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:white">Metformin 500mg</div>
+      <div class="type-specs">DM Sans · 15px · SemiBold 600</div>
+    </div>
+    <div class="type-row">
+      <div class="type-name">Body / Labels</div>
+      <div class="type-sample" style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.7)">Take with food. Refill in 12 days.</div>
+      <div class="type-specs">DM Sans · 13px · Regular 400</div>
+    </div>
+    <div class="type-row">
+      <div class="type-name">Micro / Tags</div>
+      <div class="type-sample" style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.5)">TODAY'S MEDICATIONS</div>
+      <div class="type-specs">DM Sans · 10px · 600 · uppercase · 1px spacing</div>
+    </div>
+  </div>
+
+  <div class="section-label">Key Components</div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:40px">
+
+    <!-- Buttons -->
+    <div class="info-section" style="flex:1;min-width:280px;margin-bottom:0">
+      <h2 style="font-size:18px;margin-bottom:16px">Buttons</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="button" style="background:var(--teal);color:white;border:none;border-radius:14px;padding:14px 20px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer">Primary Log Reading</button>
+        <button class="button" style="background:var(--gray-200);color:var(--gray-600);border:none;border-radius:14px;padding:14px 20px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer">Secondary Export</button>
+        <button class="button" style="background:transparent;color:var(--teal);border:1.5px solid var(--teal);border-radius:14px;padding:13px 20px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer">Outline View All</button>
+        <button class="button" style="background:var(--red-light);color:var(--red);border:none;border-radius:14px;padding:14px 20px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer">Destructive only for urgent</button>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="info-section" style="flex:1;min-width:280px;margin-bottom:0">
+      <h2 style="font-size:18px;margin-bottom:16px">Status Badges</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="background:var(--teal-light);color:var(--teal);font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px">✓ Done</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.5)">Medication taken</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="background:var(--amber-light);color:var(--amber);font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px">Due Now</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.5)">Needs attention</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="background:var(--blue-light);color:var(--blue);font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px">Scheduled</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.5)">Future event</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="background:var(--red-light);color:var(--red);font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px">⚠ Critical</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.5)">Urgent only</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ══════════ USER FLOW ══════════ -->
+<div class="canvas" id="canvas-flow">
+
+  <div class="info-section">
+    <h2>User Flows 3 Core Journeys</h2>
+    <p>Three flows cover 80% of daily use. Each is optimized for speed chronic condition patients need to complete tasks in seconds, not minutes.</p>
+  </div>
+
+  <div class="section-label">Flow 1 · Daily Morning Check-in</div>
+  <div class="flow-diagram">
+    <div class="flow-node start">Open App</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Today Screen</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Health Score visible</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Check meds</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Mark as taken</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node end">Done · &lt;1 min</div>
+  </div>
+
+  <div class="section-label">Flow 2 · Log Symptom (3 steps, &lt;30 sec)</div>
+  <div class="flow-diagram">
+    <div class="flow-node start">Tap ＋ Log</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Step 1<br><span style="font-size:10px;opacity:0.6">What symptom?</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Step 2<br><span style="font-size:10px;opacity:0.6">How severe? 1–5</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Step 3<br><span style="font-size:10px;opacity:0.6">Notes? (optional)</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node end">Saved · logged</div>
+  </div>
+
+  <div class="section-label">Flow 3 · Prepare for Doctor Appointment</div>
+  <div class="flow-diagram">
+    <div class="flow-node start">Doctor Tab</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">See appointment</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Tap "Generate Report"</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Select date range</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">PDF preview</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node end">Share / Download</div>
+  </div>
+
+  <div class="info-section">
+    <h2>Impact from Usability Testing</h2>
+    <p>Results from 6 participants (ages 34–67, all managing at least one chronic condition)</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon">⏱</div>
+        <h3>Symptom Logging</h3>
+        <p>Reduced from avg 4 min 10 sec → under 30 seconds. All 6 participants completed without assistance.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📋</div>
+        <h3>Appointment Prep</h3>
+        <p>5 of 6 users successfully generated a health summary report for their doctor without any guidance.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">⭐</div>
+        <h3>Usability Score</h3>
+        <p>All 6 participants rated the medication tracking flow as "easy" or "very easy" on a 5-point scale.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function switchView(view) {
+  document.querySelectorAll('.canvas').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('canvas-' + view).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
